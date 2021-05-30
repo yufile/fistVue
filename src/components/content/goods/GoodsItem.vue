@@ -25,11 +25,12 @@ export default {
     detail() {
      /* if(this.$route.path.indexOf('/detail'))*/
       this.$router.push('/detail/' + this.goodsItem.iid)
+      /*console.log(this.goodsItem);*/
     }
   },
   computed: {
     showImage() {
-      return this.goodsItem.image || this.goodsItem.show.img
+      return this.goodsItem.image || this.goodsItem.img || this.goodsItem.show.img
     }
   }
 }

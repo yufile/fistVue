@@ -39,7 +39,7 @@ import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/content/tabcontrol/TabControl";
 import Goods from "@/components/content/goods/Goods";
 import Scroll from "@/components/common/scroll/Scroll";
-import {bockBopMixin} from "@/common/mixins";
+import {bockBopMixin,suckTopNav} from "@/common/mixins";
 import {getHomeMultidata,getHomeGoods} from "@/network/home";
 export default {
   name: "Cart",
@@ -63,13 +63,13 @@ export default {
         'sell': {page: 0, list: []}
       },
       // 展示的数据 pop
-      currIndex : 'pop',
       offsetTop: 0,
       isFixed: false,
       scrollY: 0 ,// 保存当前滑动位置
     }
   },
-  mixins:[bockBopMixin],
+  // 混入
+  mixins:[bockBopMixin,suckTopNav],
   created() {
     this.getHomeMultidata();
     this.getHomeGoods('pop')
@@ -94,22 +94,6 @@ export default {
     }
   },
   methods: {
-    /*
-    * 点击事件
-    * */
-    btnClick(index) {
-      switch (index) {
-        case 0 : this.currIndex = 'pop'
-          break;
-        case 1 : this.currIndex = 'new'
-          break;
-        case 2 : this.currIndex = 'sell'
-          break;
-      }
-      // 获取 组件TabControl中的 counter 值 让这两个导航栏 所点击时 响应相同
-      this.$refs.tabControl1.counter = index
-      this.$refs.tabControl2.counter = index
-    },
     // 判断当前滚动位置 是否让 回到顶部按钮 显示 与消失
     scrollBtn(position) {
       // 1.判断当前滚动位置是否 大于 1000
